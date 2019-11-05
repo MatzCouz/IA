@@ -2,6 +2,25 @@ __author__ = 'justinarmstrong'
 
 import os
 import pygame as pg
+from pynput.keyboard import Key, Controller
+from random import randint
+import random
+import time
+from . import ia
+from . import constants as c
+
+kkb = Controller()
+gap_between_keypress = 0
+to_press = 'a'
+
+temp_pointer = 0
+model_number = 1
+current_pool = ia.current_pool
+temp_for_model_num_bug = False
+models_fitness = ia.fitness
+current_fitness = 0
+last_3_keys = [0,1,Key.right]
+last_10_keys = [0,1,2,3,4,5,6,7,8,'a']
 
 keybinding = {
     'action':pg.K_s,
@@ -27,7 +46,8 @@ class Control(object):
         self.state_dict = {}
         self.state_name = None
         self.state = None
-
+        self.generated_input = [Key.right,'a',Key.left]
+        
     def setup_states(self, state_dict, start_state):
         self.state_dict = state_dict
         self.state_name = start_state
@@ -62,10 +82,14 @@ class Control(object):
 
 
     def toggle_show_fps(self, key):
-        if key == pg.K_F5:
+         if key == pg.K_F5:
             self.show_fps = not self.show_fps
             if not self.show_fps:
                 pg.display.set_caption(self.caption)
+         if key == pg.K_F6:
+            print("F6 pressed! Saving pool")
+            #kk.save_pool()
+
 
 
     def main(self):
