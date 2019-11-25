@@ -5,6 +5,7 @@ from .. import setup, tools
 from .. import constants as c
 from .. components import info, mario
 
+lives = 50000
 
 class Menu(tools._State):
     def __init__(self):
@@ -12,7 +13,7 @@ class Menu(tools._State):
         tools._State.__init__(self)
         persist = {c.COIN_TOTAL: 0,
                    c.SCORE: 0,
-                   c.LIVES: 3,
+                   c.LIVES: lives,
                    c.TOP_SCORE: 0,
                    c.CURRENT_TIME: 0.0,
                    c.LEVEL_STATE: None,
@@ -125,7 +126,7 @@ class Menu(tools._State):
         """Resets the game info in case of a Game Over and restart"""
         self.game_info[c.COIN_TOTAL] = 0
         self.game_info[c.SCORE] = 0
-        self.game_info[c.LIVES] = 3
+        self.game_info[c.LIVES] = lives
         self.game_info[c.CURRENT_TIME] = 0.0
         self.game_info[c.LEVEL_STATE] = None
 
